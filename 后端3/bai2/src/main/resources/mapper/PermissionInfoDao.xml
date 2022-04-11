@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bai.config.dao.PermissionInfoDao">
+  <resultMap id="PerMap" type="com.bai.config.entity.PermissionInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="sub_time" jdbcType="TIMESTAMP" property="subTime" />
+  </resultMap>
+
+  <insert id="insertPer" keyColumn="id" keyProperty="id" parameterType="com.bai.config.entity.PermissionInfo" useGeneratedKeys="true">
+    insert into permission_info (`name`,sub_time,content) values (#{name},#{subTime},#{content})
+  </insert>
+  <update id="updatePer" parameterType="com.bai.config.entity.PermissionInfo">
+    update permission_info set `name`=#{name},content=#{content} where id=#{id}
+  </update>
+  <select id="findAll" resultMap="PerMap" parameterType="java.util.Map">
+    select * from permission_info where 1=1
+    <if test="name!=null and name!=''">and `name` LIKE CONCAT(CONCAT('%', #{name}), '%')</if>
+  </select>
+  <select id="findById" resultMap="PerMap" parameterType="java.lang.Integer">
+    select * from permission_info where id=#{id}
+  </select>
+  <delete id="removePer" parameterType="java.lang.Integer">
+    delete from permission_info where id=#{id}
+  </delete>
+</mapper>

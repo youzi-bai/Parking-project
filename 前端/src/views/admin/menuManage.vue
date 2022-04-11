@@ -1,0 +1,166 @@
+<template>
+    <div id="menuManage">
+        <div style="display:flex">
+            <div >
+                <el-form class="mgtop10" :model="searchForm"  :inline="true" label-width="80px" label-position="right">
+                    <el-form-item label="菜单名称">
+                        <el-input v-model="searchForm.name" placeholder="请输入菜单名称" clearable></el-input>
+                    </el-form-item>
+                </el-form>
+            </div>
+            <div  style="margin-left:10px">
+                <el-button icon="el-icon-search" type="primary" @click="doSearch">查询</el-button>
+                <el-button icon="el-icon-plus" @click="add" :disabled="!addPermission">新增</el-button>
+            </div>
+        </div>
+
+        <!-- 列表 -->
+        <el-table  stripe :data="tableData" border style="width: 100%" 
+			:header-cell-style="{'background-color': '#f5f5f5','color': '#606266','border-bottom':'solid 1px #d2d3da'}">
+			<el-table-column label="菜单名称" prop="name" align="center">
+                <template slot-scope="scope">
+                    <i class="el-icon-info"></i>
+                    <span style="margin-left: 10px">{{ scope.row.name }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="菜单路径" prop="path" align="center">
+                <template slot-scope="scope">
+                    <i class="el-icon-position"></i>
+                    <span style="margin-left: 10px">{{ scope.row.path }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="创建时间" prop="subTime" align="center">
+                <template slot-scope="scope">
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{ scope.row.subTime }}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" prop="" width="200px">
+                <template slot-scope="scope">
+                    <el-button size="mini" type="success" @click="edit(scope.row)" :disabled="!editPermission" icon="el-icon-edit">编辑</el-button>
+                    <el-button size="mini" type="danger" @click="del(scope.row.id)" :disabled="!removePermission" icon="el-icon-delete">删除</el-button>
+                </template>
+            </el-table-column>
+		</el-table>
+
+        <!-- 新增弹框 -->
+        <el-dialog :visible.sync="addDialog" width="45%" label-width="10px">
+            <el-form  :model="publishForm" inline  ref="publishForm" :rules="rules">
+                <el-form-item label="菜单名称" prop="name">
+                    <el-input v-model="publishForm.name" suffix-icon="el-icon-info" placeholder="请输入菜单名称"></el-input>
+                </el-form-item>
+                <el-form-item label="菜单路径" prop="path">
+                    <el-input v-model="publishForm.path" suffix-icon="el-icon-paperclip" placeholder="请输入菜单路径" :disabled="dialogTitle=='修改菜单'"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="addDialog = false">取 消</el-button>
+                <el-button type="primary" @click="publishMenu">确 定</el-button>
+            </span>
+        </el-dialog>
+    </div>
+</template>
+
+<script>
+export default {
+    data(){
+        return{
+            searchForm:{
+                page:1,
+                pageSize:10,
+                total:0
+            },
+            addDialog:false,
+            dialogTitle:'',
+            publishForm:{},
+            tableData:[],
+            addPermission:false,
+            editPermission:false,
+            removePermission:false,
+            //表单验证规则
+            rules:{
+                name:[{required: true, message: '请输入菜单名称', trigger: 'blur'}],
+                path:[{required: true, message: '请输入菜单路径', trigger: 'blur'}],
+            }
+        }
+    },
+
+    methods:{
+        //新增按钮事件
+        add(){
+            this.publishForm = {}
+            this.dialogTitle = '新增菜单'
+            this.addDialog = true
+        },
+    
+        //保存菜单
+        publishMenu(){
+            //表单验证
+            this.$refs['publishForm'].validate((valid) => {
+                if (valid) {
+                    this.$http.http_post(this,this.$api.menu.publishMenu,this.publishForm,true,(res)=>{
+                        if(res.code==1){
+                            this.addDialog = false
+                            this.searchMenu()
+                        }
+                    })
+                } else {
+                    return false;
+                }
+            });
+            
+        },
+
+        //编辑
+        edit(row){
+            console.log('eid',row)
+            this.publishForm = row
+            this.dialogTitle = '修改菜单'
+            this.addDialog = true
+        },
+        //删除
+        del(id){
+            this.$http.http_get(this,this.$api.menu.removeMenu.replace(/{id}/,id),null,true,(res)=>{
+                if(res.code==1){
+                    this.searchMenu()
+                }
+            })
+        },
+        //查询菜单
+        searchMenu(){
+            this.tableData=[]
+            this.$http.http_post(this,this.$api.menu.findAllMenu,this.searchForm,false,(res)=>{
+                if(res.code == 1){
+                    this.tableData = res.object
+                }
+            })
+        },
+
+        //doSearch
+        doSearch(){
+            this.searchMenu()
+        }
+    },
+
+    created(){
+        this.searchMenu()
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+        userInfo.menus.filter(item =>{
+            if(item.path == '/menuManage'){
+                item.pers.split(',').filter(i =>{
+                    if(i.indexOf('新增')!=-1){
+                        this.addPermission = true
+                    }
+                    if(i.indexOf('删除')!=-1){
+                        this.removePermission = true
+                    }
+                    if(i.indexOf('修改')!=-1){
+                        this.editPermission = true
+                    }
+                })
+                
+            }
+        })
+    }
+}
+</script>

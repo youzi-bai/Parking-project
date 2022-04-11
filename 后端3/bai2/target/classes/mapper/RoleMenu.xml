@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bai.config.dao.RoleMenuDao">
+  <resultMap id="RoleMap" type="com.bai.config.entity.RoleMenu">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="per_id" jdbcType="VARCHAR" property="perId" />
+    <result column="per_name" jdbcType="VARCHAR" property="perName" />
+    <result column="sub_time" jdbcType="TIMESTAMP" property="subTime" />
+  </resultMap>
+
+  <insert id="insertRoleMenu" keyColumn="id" keyProperty="id" parameterType="com.bai.config.entity.RoleMenu" useGeneratedKeys="true">
+    insert into role_menu (role_id,menu_id,role_name,menu_name,sub_time,per_id,per_name)
+    values (#{roleId},#{menuId},#{roleName},#{menuName},#{subTime},#{perId},#{perName})
+  </insert>
+  <update id="updateRoleMenu" parameterType="com.bai.config.entity.RoleMenu">
+    update role_menu set role_id=#{roleId},menu_id=#{menuId},role_name=#{roleName},
+    menu_name=#{menuName},per_name=#{perName},per_id=#{perId}  where id=#{id}
+  </update>
+  <select id="findByCondition" resultMap="RoleMap" parameterType="java.util.Map" >
+    select * from role_menu where 1=1
+    <if test="roleId!=null">and role_id=#{roleId}</if>
+  </select>
+  <delete id="removeRoleMenu" parameterType="java.lang.Integer">
+    delete from role_menu where id=#{id}
+  </delete>
+  <select id="findById" parameterType="java.lang.Integer" resultMap="RoleMap">
+    select * from  role_menu where id=#{id}
+  </select>
+</mapper>

@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>小白停车场</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="小白停车场" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <!-- <script src="assets/js/echarts.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+
+<body >
+
+    <div id="vue_index">
+        <!-- <header class="am-topbar am-topbar-inverse admin-header">
+            <div class="am-topbar-brand">
+                <a href="javascript:;" class="tpl-logo">
+                    <img src="assets/img/logo.png" alt="">
+                </a>
+            </div>
+            <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+    
+            </div>
+    
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+    
+            <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    
+                <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+                   
+                    <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    
+                    <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                        <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+                            <span class="tpl-header-list-user-nick">{{userInfo.nameUser}}</span><span class="tpl-header-list-user-ico"> <img src="assets/img/user01.png"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
+                            <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                            <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="###" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+                </ul>
+            </div>
+        </header> -->
+
+       <!--- <div class="tpl-page-container tpl-page-header-fixed">
+
+             <div class="tpl-left-nav tpl-left-nav-hover">
+                <div class="tpl-left-nav-title">
+                    菜单列表
+                </div>
+                <div class="tpl-left-nav-list">
+                    <ul class="tpl-left-nav-menu">
+                        <li class="tpl-left-nav-item">
+                            <a href="index.html" class="nav-link active">
+                                <i class="am-icon-home"></i>
+                                <span>首页</span>
+                            </a>
+                        </li>
+                        <li class="tpl-left-nav-item">
+                            <a href="chart.html" class="nav-link tpl-left-nav-link-list">
+                                <i class="am-icon-bar-chart"></i>
+                                <span>用户信息</span>
+                                <i class="tpl-left-nav-content tpl-badge-danger"></i>
+                            </a>
+                        </li>
+    
+                        <li class="tpl-left-nav-item">
+                            <a href="权限管理.html" class="nav-link tpl-left-nav-link-list">
+                                <i class="am-icon-table"></i>
+                                <span>权限管理</span>
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+                            </a>
+                            <ul class="tpl-left-nav-sub-menu">
+                                <li>
+                                    <a href="table-font-list.html">
+                                        <i class="am-icon-angle-right"></i>
+                                        <span>用户管理</span>
+                                        <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                    </a>
+    
+                                    <a href="角色管理.html">
+                                        <i class="am-icon-angle-right"></i>
+                                        <span>角色管理</span>
+                                        <i class="tpl-left-nav-content tpl-badge-success"></i>
+    
+                                        <a href="停车场管理.html">
+                                            <i class="am-icon-angle-right"></i>
+                                            <span>停车场管理</span>
+                                            <i class="tpl-left-nav-content tpl-badge-primary"></i>
+    
+                                            <a href="订单管理.html">
+                                                <i class="am-icon-angle-right"></i>
+                                                <span>订单管理</span>
+                                            </a>
+                                            <a href="菜单管理.html">
+                                                <i class="am-icon-angle-right"></i>
+                                                <span>菜单管理</span>
+                                            </a>
+                                            <a href="权限管理.html">
+                                                <i class="am-icon-angle-right"></i>
+                                                <span>权限管理</span>
+                                            </a>
+                                </li>
+                            </ul>
+                        </li>
+    
+                        <li class="tpl-left-nav-item">
+                            <a href="javascript:;" class="nav-link tpl-left-nav-link-list">
+                                <i class="am-icon-wpforms"></i>
+                                <span>停车场信息</span>
+                                <i class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right tpl-left-nav-more-ico-rotate"></i>
+                            </a>
+                            <ul class="tpl-left-nav-sub-menu" style="display: block;">
+                                <li>
+                                    <a href="form-amazeui.html">
+                                        <i class="am-icon-angle-right"></i>
+                                        <span>停车场信息</span>
+                                        <i class="am-icon-star tpl-left-nav-content-ico am-fr am-margin-right"></i>
+                                    </a>
+    
+                                    <a href="form-line.html">
+                                        <i class="am-icon-angle-right"></i>
+                                        <span>车辆信息</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+    
+                  
+                    </ul>
+                </div>
+            </div> -->
+    
+    
+    
+            <div class="" > 
+                <div class="tpl-content-page-title">
+                     首页
+                </div>
+                <ol class="am-breadcrumb">
+                    <li><a href="#" class="am-icon-home">首页</a></li>
+                    
+                    <li class="am-active">内容</li>
+                </ol>
+                <div class="tpl-content-scope">
+                    <div class="note note-info">
+                        <h3>小白停车场为方便而生
+                            <span class="close" data-close="note"></span>
+                        </h3>
+                        <p> 小白停车场顾名思义，由小白开发，功能不多，但耗尽心力，能用且用，望珍惜！</p>
+                        <p><span class="label label-danger">提示:</span> 请您保持良心的心态来使用哦！
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                        <div class="dashboard-stat blue">
+                            <div class="visual">
+                                <i class="am-icon-comments-o"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number"> 1 </div>
+                                <div class="desc"> 摆式 </div>
+                            </div>
+                            <a class="more" href="#"> 暂时不知道要做啥，先放着
+                        <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                        </div>
+                    </div>
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                        <div class="dashboard-stat red">
+                            <div class="visual">
+                                <i class="am-icon-bar-chart-o"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number"> 2</div>
+                                <div class="desc"> 摆式 </div>
+                            </div>
+                            <a class="more" href="#"> 暂时不知道要做啥，先放着
+                        <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                        </div>
+                    </div>
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                        <div class="dashboard-stat green">
+                            <div class="visual">
+                                <i class="am-icon-apple"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number"> 3 </div>
+                                <div class="desc"> 摆式 </div>
+                            </div>
+                            <a class="more" href="#"> 暂时不知道要做啥，先放着
+                        <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                        </div>
+                    </div>
+                    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+                        <div class="dashboard-stat purple">
+                            <div class="visual">
+                                <i class="am-icon-android"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number"> 4 </div>
+                                <div class="desc"> 摆式 </div>
+                            </div>
+                            <a class="more" href="#"> 暂时不知道要做啥，先放着
+                        <i class="m-icon-swapright m-icon-white"></i>
+                    </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/iscroll.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
+
+<script>
+    const vueObj = new Vue({
+         el: '#vue_index',
+         data: function () {
+             return {
+                 userInfo:{}
+             }
+         },
+         methods:{
+ 
+         },
+         create(){
+            
+ 
+         }
+     })
+     
+     window.onload = function(){
+        if(sessionStorage.getItem('userInfo')!=null){
+            vueObj.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+        }
+     }
+     
+ </script>

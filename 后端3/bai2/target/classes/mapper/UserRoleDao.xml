@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bai.config.dao.UserRoleDao">
+  <resultMap id="UserRoleMap" type="com.bai.config.entity.UserRole">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+  </resultMap>
+
+  <insert id="insertUserRole" keyColumn="id" keyProperty="id" parameterType="com.bai.config.entity.UserRole" useGeneratedKeys="true">
+    insert into user_role (role_id,user_id) values (#{roleId},#{userId})
+  </insert>
+  <update id="updateUserRole" parameterType="com.bai.config.entity.UserRole">
+    update user_role set role_id=#{roleId},user_id=#{userId} where id=#{id}
+  </update>
+  <select id="findByUser" resultMap="UserRoleMap" parameterType="java.lang.Integer">
+    select * from user_role where user_id=#{userId}
+  </select>
+  <delete id="removeUserRole" parameterType="java.lang.Integer">
+    delete from user_role where id=#{id}
+  </delete>
+</mapper>

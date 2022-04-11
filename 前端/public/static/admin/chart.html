@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Amaze UI Admin index Examples</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="小白停车场" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <!-- <script src="assets/js/echarts.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="http://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</head>
+
+<body >
+    <div id="vue_chart">
+        <!-- <header class="am-topbar am-topbar-inverse admin-header">
+            <div class="am-topbar-brand">
+                <a href="javascript:;" class="tpl-logo">
+                    <p style="color: black;font-size: larger;font-family: sans-serif;">小白停车场</p>
+                </a>
+            </div>
+            <div class="am-icon-list tpl-header-nav-hover-ico am-fl am-margin-right">
+    
+            </div>
+    
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+    
+            <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
+    
+                <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
+                   
+                    <li class="am-hide-sm-only"><a href="javascript:;" id="admin-fullscreen" class="tpl-header-list-link"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
+    
+                    <li class="am-dropdown" data-am-dropdown data-am-dropdown-toggle>
+                        <a class="am-dropdown-toggle tpl-header-list-link" href="javascript:;">
+                            <span class="tpl-header-list-user-nick">{{userInfo.nameUser}}</span><span class="tpl-header-list-user-ico"> <img src="assets/img/user01.png"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li><a href="#"><span class="am-icon-bell-o"></span> 资料</a></li>
+                            <li><a href="#"><span class="am-icon-cog"></span> 设置</a></li>
+                            <li><a href="#"><span class="am-icon-power-off"></span> 退出</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="###" class="tpl-header-list-link"><span class="am-icon-sign-out tpl-header-list-ico-out-size"></span></a></li>
+                </ul>
+            </div>
+        </header> -->
+
+        <div class="tpl-page-container tpl-page-header-fixed">
+            <div class="tpl-content-wrapper">
+                <div class="tpl-content-page-title">
+                    用户信息
+                </div>
+                <ol class="am-breadcrumb">
+                    <li><a href="#" class="am-icon-home">首页</a></li>
+                    <li><a href="#">用户信息</a></li>
+                    <li class="am-active"></li>
+                </ol>
+                <div class="col-xl-4">
+                    <div class="card">
+                      <!-- <grammarly-extension data-grammarly-shadow-root="true" style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension> -->
+                      <div class="card-header">
+                        <h4 class="card-title mb-0">我的资料</h4>
+                        <div class="card-options"><a class="card-options-collapse" href="javascript:;" data-bs-toggle="card-collapse" data-bs-original-title="" title=""><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="javascript:;" data-bs-toggle="card-remove" data-bs-original-title="" title=""><i class="fe fe-x"></i></a></div>
+                      </div>
+                      <div class="card-body">
+                        <!-- <form> -->
+                          <div class="profile-title">
+                            <div class="media ad-profile2-img">
+                                <img alt="" src="./assets/img/user01.png">
+                                    
+                                <div class="am-form-group am-form-file" style="padding-top: 10px;">
+                                        <button type="button" class="am-btn am-btn-danger am-btn-sm">
+                                        <i class="am-icon-cloud-upload"></i> 更改图片信息</button>
+                                        <input id="doc-form-file" type="file" multiple>
+                                </div>
+    
+                                     
+                              <div class="media-body">
+                                <label class="form-label">姓名</label>
+                                <p>{{userDetail.nameUser}}</p>
+                                <label class="form-label">身份</label>
+                                <p>
+                                    <span v-for="(item,index) in userDetail.roleInfos" :key="index">{{item.roleName}}，</span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">个性简介</label>
+                            <textarea v-model="userDetail.content" class="form-control" rows="5" spellcheck="false">个性丰富,无法简介</textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">邮箱地址</label>
+                            <input v-model="userDetail.email" class="form-control" placeholder="your-email@domain.com" data-bs-original-title="" title="">
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">密码</label>
+                            <input v-model="userDetail.password" class="form-control" type="password" value="password" data-bs-original-title="" title="">
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label">手机号</label>
+                            <input v-model="userDetail.phone" class="form-control" type="tel" data-bs-original-title="" title="">
+                          </div>
+                          <div class="form-footer">
+                            <button class="btn btn-primary squer-btn" data-bs-original-title="" title="" onclick="saveUser()">Save</button>
+                          </div>
+                        <!-- </form> -->
+                      </div>
+                    </div>
+                  </div>
+                
+            </div>
+    
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+   const vueObj = new Vue({
+        el: '#vue_chart',
+        data: function () {
+            return {
+                userInfo:{},
+                userDetail:{}
+            }
+        },
+        methods:{
+
+        },
+        create(){
+		    
+
+        }
+    })
+    window.onload = function(){
+        if(sessionStorage.getItem('userInfo')!=null){
+            vueObj.userInfo = JSON.parse(sessionStorage.getItem('userInfo'))
+            getUserInfo()
+        }
+    }
+
+    //查用户基本信息
+    function getUserInfo(){
+        // let idUser = vueObj.userInfo.idUser
+        // $.get('http://127.0.0.1:8080/userInfo/selectByPrimaryKey',{'idUser':idUser},function(res){
+		// 	if(res.success && res.data!=null){
+        //         vueObj.userDetail = res.data
+		// 	}else if(!res.success){
+		// 		alert(res.msg)
+		// 	}
+        //     console.log('yonghu',vueObj.userDetail)
+		// })
+    }
+    
+    //保存用户
+    function saveUser(){
+        console.log('保存',vueObj.userDetail)
+        //去除表单中的roleInfo对象
+        delete vueObj.userDetail.roleInfos
+        delete vueObj.userDetail.createTime
+        delete vueObj.userDetail.updateTime
+        
+        $.post('http://127.0.0.1:8080/userInfo/updateByPrimaryKey',vueObj.userDetail,function(res){
+            if(res.success && res.data!=null){
+				vueObj.userDetail = res.data
+			}else if(!res.success){
+				alert(res.msg)
+			}
+        })
+    }
+</script>
